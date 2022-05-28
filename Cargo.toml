@@ -1,0 +1,16 @@
+[package]
+name = "jvmti-rs"
+description = "Unsafe bindings for the JVMTI interface."
+homepage = "https://github.com/stardust-enterprises/jvmti-rs"
+repository = "https://github.com/stardust-enterprises/jvmti-rs"
+version = "1.0.0"
+authors = ["xtrm <oss@xtrm.me>"]
+edition = "2021"
+license-file = "LICENSE"
+readme = "README.md"
+keywords = ["jvm", "java", "jvmti"]
+categories = ["external-ffi-bindings"]
+
+[dependencies]
+# Using GitHub version as it fixes an issue with Windows
+jvm-rs = { git = "https://github.com/x4e/jvm-rs" }
