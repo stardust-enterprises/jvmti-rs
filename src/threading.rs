@@ -19,15 +19,16 @@ impl JvmtiInterface {
                 (self.pointer, &mut count, &mut threads)
         };
 
-        if error != jvmtiError_JVMTI_ERROR_NONE {
-            Err(error)
-        } else {
-            let mut vec = Vec::new();
-            for pos in 0..count {
-                let thread = unsafe { *threads.offset(pos as _) };
-                vec.push(thread);
-            }
-            Ok(vec)
+        match error {
+            jvmtiError_JVMTI_ERROR_NONE => {
+                let mut vec = Vec::new();
+                for pos in 0..count {
+                    let thread = unsafe { *threads.offset(pos as _) };
+                    vec.push(thread);
+                }
+                Ok(vec)
+            },
+            _ => Err(error),
         }
     }
 
@@ -41,10 +42,9 @@ impl JvmtiInterface {
                 (self.pointer, *thread)
         };
 
-        if error != jvmtiError_JVMTI_ERROR_NONE {
-            Err(error)
-        } else {
-            Ok(())
+        match error {
+            jvmtiError_JVMTI_ERROR_NONE => Ok(()),
+            _ => Err(error),
         }
     }
 
@@ -58,10 +58,9 @@ impl JvmtiInterface {
                 (self.pointer, *thread)
         };
 
-        if error != jvmtiError_JVMTI_ERROR_NONE {
-            Err(error)
-        } else {
-            Ok(())
+        match error {
+            jvmtiError_JVMTI_ERROR_NONE => Ok(()),
+            _ => Err(error),
         }
     }
 
@@ -76,10 +75,9 @@ impl JvmtiInterface {
                 (self.pointer, *thread, *exception)
         };
 
-        if error != jvmtiError_JVMTI_ERROR_NONE {
-            Err(error)
-        } else {
-            Ok(())
+        match error {
+            jvmtiError_JVMTI_ERROR_NONE => Ok(()),
+            _ => Err(error),
         }
     }
 
@@ -93,10 +91,9 @@ impl JvmtiInterface {
                 (self.pointer, *thread)
         };
 
-        if error != jvmtiError_JVMTI_ERROR_NONE {
-            Err(error)
-        } else {
-            Ok(())
+        match error {
+            jvmtiError_JVMTI_ERROR_NONE => Ok(()),
+            _ => Err(error),
         }
     }
 
@@ -118,10 +115,9 @@ impl JvmtiInterface {
                 (self.pointer, *thread, &mut info)
         };
 
-        if error != jvmtiError_JVMTI_ERROR_NONE {
-            Err(error)
-        } else {
-            Ok(info)
+        match error {
+            jvmtiError_JVMTI_ERROR_NONE => Ok(info),
+            _ => Err(error),
         }
     }
 
@@ -138,15 +134,16 @@ impl JvmtiInterface {
                 (self.pointer, *thread, &mut count, &mut monitors)
         };
 
-        if error != jvmtiError_JVMTI_ERROR_NONE {
-            Err(error)
-        } else {
-            let mut vec = Vec::new();
-            for pos in 0..count {
-                let monitor = unsafe { *monitors.offset(pos as _) };
-                vec.push(monitor);
-            }
-            Ok(vec)
+        match error {
+            jvmtiError_JVMTI_ERROR_NONE => {
+                let mut vec = Vec::new();
+                for pos in 0..count {
+                    let monitor = unsafe { *monitors.offset(pos as _) };
+                    vec.push(monitor);
+                }
+                Ok(vec)
+            },
+            _ => Err(error),
         }
     }
 
@@ -162,10 +159,9 @@ impl JvmtiInterface {
                 (self.pointer, *thread, &mut monitor)
         };
 
-        if error != jvmtiError_JVMTI_ERROR_NONE {
-            Err(error)
-        } else {
-            Ok(monitor)
+        match error {
+            jvmtiError_JVMTI_ERROR_NONE => Ok(info),
+            _ => Err(error),
         }
     }
 }
