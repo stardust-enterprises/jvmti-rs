@@ -1,5 +1,3 @@
-#[allow(non_upper_case_globals)]
-
 use std::ptr::null_mut;
 use jvm_rs::jni::jobject;
 use jvm_rs::jvmti::{jthread, jvmtiError, jvmtiError_JVMTI_ERROR_NONE, jvmtiThreadInfo};
