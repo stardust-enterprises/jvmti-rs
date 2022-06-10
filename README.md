@@ -12,6 +12,8 @@ doesn't offer the greatest syntax for idiomatic Rust programming.
 
 <details>
 <summary>With jvm-rs</summary>
+<br>
+
 ```rs
 #[no_mangle]
 pub unsafe extern "system" fn JNI_OnLoad(jvm: *mut JavaVM, _res: &mut c_void) -> c_int {
@@ -36,10 +38,13 @@ pub unsafe extern "system" fn JNI_OnLoad(jvm: *mut JavaVM, _res: &mut c_void) ->
     // actually do stuff...
 }
 ```
+
 </details>
 
 <details>
 <summary>With jvmti-rs</summary>
+<br>
+
 ```rs
 #[no_mangle]
 pub unsafe extern "system" fn JNI_OnLoad(jvm: *mut JavaVM, _res: &mut c_void) -> c_int {
@@ -54,6 +59,7 @@ pub unsafe extern "system" fn JNI_OnLoad(jvm: *mut JavaVM, _res: &mut c_void) ->
     }
 }
 ```
+
 </details>
 
 ## how to use
