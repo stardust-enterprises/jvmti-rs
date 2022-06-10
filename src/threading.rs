@@ -1,7 +1,9 @@
+#[allow(non_upper_case_globals)]
+
 use std::ptr::null_mut;
 use jvm_rs::jni::jobject;
 use jvm_rs::jvmti::{jthread, jvmtiError, jvmtiError_JVMTI_ERROR_NONE, jvmtiThreadInfo};
-use crate::JvmtiInterface;
+use crate::{error_msg, JvmtiInterface};
 
 /**
  * JVMTI Threading implementations.
@@ -15,7 +17,7 @@ impl JvmtiInterface {
 
         let error = unsafe {
             self.interface.GetAllThreads
-                .expect("Couldn't find GetAllThreads.")
+                .expect(format!(error_msg!(), "GetAllThreads").as_str())
                 (self.pointer, &mut count, &mut threads)
         };
 
@@ -38,7 +40,7 @@ impl JvmtiInterface {
     ) -> Result<(), jvmtiError> {
         let error = unsafe {
             self.interface.SuspendThread
-                .expect("Couldn't find SuspendThread")
+                .expect(format!(error_msg!(), "SuspendThread").as_str())
                 (self.pointer, *thread)
         };
 
@@ -54,7 +56,7 @@ impl JvmtiInterface {
     ) -> Result<(), jvmtiError> {
         let error = unsafe {
             self.interface.ResumeThread
-                .expect("Couldn't find ResumeThread")
+                .expect(format!(error_msg!(), "ResumeThread").as_str())
                 (self.pointer, *thread)
         };
 
@@ -71,7 +73,7 @@ impl JvmtiInterface {
     ) -> Result<(), jvmtiError> {
         let error = unsafe {
             self.interface.StopThread
-                .expect("Couldn't find StopThread")
+                .expect(format!(error_msg!(), "StopThread").as_str())
                 (self.pointer, *thread, *exception)
         };
 
@@ -87,7 +89,7 @@ impl JvmtiInterface {
     ) -> Result<(), jvmtiError> {
         let error = unsafe {
             self.interface.InterruptThread
-                .expect("Couldn't find InterruptThread")
+                .expect(format!(error_msg!(), "InterruptThread").as_str())
                 (self.pointer, *thread)
         };
 
@@ -111,7 +113,7 @@ impl JvmtiInterface {
 
         let error = unsafe {
             self.interface.GetThreadInfo
-                .expect("Couldn't find GetThreadInfo")
+                .expect(format!(error_msg!(), "GetThreadInfo").as_str())
                 (self.pointer, *thread, &mut info)
         };
 
@@ -130,7 +132,7 @@ impl JvmtiInterface {
 
         let error = unsafe {
             self.interface.GetOwnedMonitorInfo
-                .expect("Couldn't find GetOwnedMonitorInfo.")
+                .expect(format!(error_msg!(), "GetOwnedMonitorInfo").as_str())
                 (self.pointer, *thread, &mut count, &mut monitors)
         };
 
@@ -155,12 +157,12 @@ impl JvmtiInterface {
 
         let error = unsafe {
             self.interface.GetCurrentContendedMonitor
-                .expect("Couldn't find GetCurrentContendedMonitor")
+                .expect(format!(error_msg!(), "GetCurrentContendedMonitor").as_str())
                 (self.pointer, *thread, &mut monitor)
         };
 
         match error {
-            jvmtiError_JVMTI_ERROR_NONE => Ok(info),
+            jvmtiError_JVMTI_ERROR_NONE => Ok(monitor),
             _ => Err(error),
         }
     }
