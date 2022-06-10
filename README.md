@@ -52,10 +52,15 @@ pub unsafe extern "system" fn JNI_OnLoad(jvm: *mut JavaVM, _res: &mut c_void) ->
     let jvmti = JvmtiInterface::from_vm(jvm, JVMTI_VERSION_1_2);
 
     // Getting loaded classes
-    let classes = jvmti.get_loaded_classes()?;
+    let result = jvmti.get_loaded_classes();
 
-    for class in classes {
-        // Do stuff...
+    match result {
+        Ok(classes) => {
+            for class in classes {
+                // Do stuff
+            }
+        },
+        Err(e) => panic!(e);
     }
 }
 ```
