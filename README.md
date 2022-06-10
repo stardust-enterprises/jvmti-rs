@@ -5,13 +5,13 @@ Interact with the JVM Tooling Interface with idiomatic Rust.
 ## why?
 
 This work is based on [x4e's jvm-rs][jvm-rs] project, which is feature-rich but
-doesn't offer the greatest syntax for idiomatic Rust programming, for example:
+doesn't offer the greatest syntax for idiomatic Rust programming.
 
 ### comparaisons
 
 
 <details>
-<summary>With `jvm-rs`</summary>
+<summary>With jvm-rs</summary>
 ```rs
 #[no_mangle]
 pub unsafe extern "system" fn JNI_OnLoad(jvm: *mut JavaVM, _res: &mut c_void) -> c_int {
@@ -39,7 +39,7 @@ pub unsafe extern "system" fn JNI_OnLoad(jvm: *mut JavaVM, _res: &mut c_void) ->
 </details>
 
 <details>
-<summary>With `jvmti-rs`</summary>
+<summary>With jvmti-rs</summary>
 ```rs
 #[no_mangle]
 pub unsafe extern "system" fn JNI_OnLoad(jvm: *mut JavaVM, _res: &mut c_void) -> c_int {
